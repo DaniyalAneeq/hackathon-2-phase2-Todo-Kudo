@@ -1,9 +1,9 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { ModernDashboardWrapper } from "./ModernDashboardWrapper";
+import { ModernTaskListWrapper } from "./ModernTaskListWrapper";
 
-export default async function DashboardPage() {
+export default async function TaskListPage() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <ModernDashboardWrapper
+    <ModernTaskListWrapper
       user={{
         name: session.user.name,
         email: session.user.email,

@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Todo App - GIAIC Hackathon Phase 2",
-  description: "A full-stack todo application with Next.js, FastAPI, and Neon PostgreSQL",
+  description: "A full-stack todo application with Next.js, FastAPI, and Neon PostgreSQL.",
 };
 
 export default function RootLayout({
