@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
-from app.api.routes import tasks
+from app.api.routes import tasks, notifications
 
 app = FastAPI(title="Todo API", version="1.0.0")
 
@@ -19,6 +19,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(tasks.router)
+app.include_router(notifications.router)
 
 @app.get("/")
 async def root():

@@ -18,6 +18,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 from sqlmodel import SQLModel
 from app.models.task import Task  # Import all models for autogenerate
+from app.models.notification import Notification  # Notification model for deadline reminders
 
 target_metadata = SQLModel.metadata
 
