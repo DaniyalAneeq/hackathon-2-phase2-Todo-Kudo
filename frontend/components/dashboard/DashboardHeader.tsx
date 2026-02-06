@@ -9,7 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bell, Settings, LogOut, User } from "lucide-react";
+import { Settings, LogOut, User } from "lucide-react";
+import { NotificationPanel } from "@/components/dashboard/NotificationPanel";
 
 interface DashboardHeaderProps {
   user: {
@@ -47,13 +48,8 @@ export function DashboardHeader({ user, onSignOut }: DashboardHeaderProps) {
 
       {/* Right: Icons */}
       <div className="flex items-center gap-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
-        >
-          <Bell className="h-5 w-5" />
-        </Button>
+        {/* Notification Panel */}
+        <NotificationPanel />
 
         {/* Settings Dropdown with Logout */}
         <DropdownMenu>

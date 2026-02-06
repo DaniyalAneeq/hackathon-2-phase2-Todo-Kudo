@@ -26,15 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { useState } from "react";
 
 export function CreateTaskForm() {
@@ -148,30 +140,13 @@ export function CreateTaskForm() {
             />
 
             <div className="space-y-2">
-              <FormLabel>Due Date (Optional)</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !dueDate && "text-muted-foreground"
-                    )}
-                    disabled={createTask.isPending}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {dueDate ? format(dueDate, "PPP") : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={dueDate}
-                    onSelect={setDueDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+              <FormLabel>Due Date & Time (Optional)</FormLabel>
+              <DateTimePicker
+                value={dueDate}
+                onChange={setDueDate}
+                disabled={createTask.isPending}
+                placeholder="Pick a date and time"
+              />
             </div>
 
             <FormField

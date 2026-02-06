@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "cross-env CSS_TRANSFORMER_WASM=1 next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -49,6 +49,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
+    "cross-env": "^7",
     "typescript": "^5"
   }
 }
