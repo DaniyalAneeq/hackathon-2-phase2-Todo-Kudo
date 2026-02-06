@@ -262,6 +262,12 @@ Specifications are organized in /specs:
 - Neon Serverless PostgreSQL (cloud-hosted, connection pooling enabled) (001-project-overview)
 - Python 3.11+ (Backend), TypeScript/ES2022 (Frontend) + FastAPI, SQLModel, Alembic (Backend); Next.js 16+, React 19, Shadcn UI (Frontend) (004-task-attributes)
 - Neon Serverless PostgreSQL (cloud-hosted, connection pooling) (004-task-attributes)
+- TypeScript (ES2022+), React 19, Next.js 16+ + Next.js App Router, Shadcn UI, Tailwind CSS, React Query, Lucide React (007-modern-dashboard)
+- N/A (frontend-only, consumes existing API) (007-modern-dashboard)
+- TypeScript (ES2022+), React 19, Next.js 16+ + Shadcn UI (Dialog, Command), React Query, Radix UI primitives (008-functional-integration)
+- Client-side localStorage for notes; existing Neon PostgreSQL for tasks (no changes) (008-functional-integration)
+- TypeScript (ES2022+), Python 3.11+ + Next.js 16+ (App Router), React 19, FastAPI, SQLModel, Browser Notification API (009-deadline-notifications)
+- Neon Serverless PostgreSQL (existing), client-side localStorage for notification state (009-deadline-notifications)
 
 ## Recent Changes
 - 001-project-overview: Added Neon Serverless PostgreSQL (cloud-hosted, connection pooling enabled)

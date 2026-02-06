@@ -18,13 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
-import { Calendar as CalendarIcon, X } from "lucide-react";
+import { Calendar as CalendarIcon } from "lucide-react";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { useUpdateTask } from "@/hooks/useUpdateTask";
 import { useDeleteTask } from "@/hooks/useDeleteTask";
 import { cn, getPriorityVariant, formatDueDate, getCategoryBadgeColor } from "@/lib/utils";
@@ -130,43 +125,14 @@ export function TaskCard({ task }: TaskCardProps) {
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-2 block">Due Date</label>
-            <div className="flex gap-2">
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className={cn(
-                      "flex-1 justify-start text-left font-normal",
-                      !editedDueDate && "text-muted-foreground"
-                    )}
-                    disabled={updateTask.isPending}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {editedDueDate ? format(editedDueDate, "PPP") : "Pick a date"}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    selected={editedDueDate}
-                    onSelect={setEditedDueDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-              {editedDueDate && (
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={() => setEditedDueDate(undefined)}
-                  disabled={updateTask.isPending}
-                  title="Clear due date"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              )}
-            </div>
+            <label className="text-sm font-medium mb-2 block">Due Date & Time</label>
+            <DateTimePicker
+              value={editedDueDate}
+              onChange={setEditedDueDate}
+              disabled={updateTask.isPending}
+              placeholder="Pick a date and time"
+              showClearButton={true}
+            />
           </div>
 
           <div>
