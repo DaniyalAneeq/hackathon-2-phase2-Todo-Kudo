@@ -269,7 +269,7 @@ export function ModernTaskListClient({
                 <div className="text-sm text-zinc-500 mb-4">
                   {data.total} {data.total === 1 ? "task" : "tasks"} found
                 </div>
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                   {data.tasks.map((task) => (
                     <ModernTaskCard key={task.id} task={task} />
                   ))}

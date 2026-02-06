@@ -35,20 +35,18 @@ export function ModernDashboardClient({
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Left Column: Energy Card (spans 4 cols) */}
-          <div className="md:col-span-4">
+          {/* Left Column Group */}
+          <div className="md:col-span-4 flex flex-col gap-6">
             <EnergyCard />
+            <div className="grid grid-cols-2 gap-4">
+              <NotesCard />
+              <TasksSummaryCard />
+            </div>
           </div>
 
-          {/* Right Column: Do Now Card (spans 8 cols) */}
+          {/* Right Column Group - Do Now Card (spans 8 cols and full height) */}
           <div className="md:col-span-8">
             <DoNowCard onAddTask={() => setIsCreateDialogOpen(true)} />
-          </div>
-
-          {/* Bottom Row: Notes and Tasks (each spans 4 cols on a 2-column sub-grid) */}
-          <div className="md:col-span-4 grid grid-cols-2 gap-4">
-            <NotesCard />
-            <TasksSummaryCard />
           </div>
         </div>
       </div>

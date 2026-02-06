@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -22,10 +23,10 @@ export function DoNowCard({ onAddTask }: DoNowCardProps) {
   });
   const updateTask = useUpdateTask();
 
-  // Get top 3 high-priority tasks (client-side filter with case-insensitive check + slice)
+  // Get top 7 high-priority tasks (client-side filter with case-insensitive check + slice)
   const priorityTasks = data?.tasks
     .filter((task) => task.priority?.toLowerCase() === 'high')
-    .slice(0, 3) || [];
+    .slice(0, 7) || [];
 
   const handleAddClick = () => {
     if (onAddTask) {
@@ -42,7 +43,7 @@ export function DoNowCard({ onAddTask }: DoNowCardProps) {
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-zinc-100 font-semibold text-lg">Do now</h2>
-          <p className="text-zinc-400 text-sm">Latest priority tasks</p>
+          <p className="text-zinc-400 text-sm">High priority tasks</p>
         </div>
         <Button
           variant="ghost"
@@ -55,7 +56,7 @@ export function DoNowCard({ onAddTask }: DoNowCardProps) {
       </div>
 
       {/* Task List */}
-      <div className="flex-1 space-y-3">
+      <div className="flex-1 space-y-3 overflow-y-auto pr-2 custom-scrollbar">
         {/* Loading State */}
         {isLoading && (
           <>
@@ -70,16 +71,25 @@ export function DoNowCard({ onAddTask }: DoNowCardProps) {
 
         {/* Empty State */}
         {!isLoading && priorityTasks.length === 0 && (
-          <p className="text-zinc-500 text-sm text-center py-8">
-            No high-priority tasks. Set priorities to see them here.
-          </p>
+          <div className="flex flex-col items-center justify-center h-full text-center py-8">
+            <p className="text-zinc-500 text-sm">
+              No high-priority tasks.
+            </p>
+            <Button 
+              variant="link" 
+              onClick={handleAddClick}
+              className="text-emerald-500 font-normal mt-1"
+            >
+              Add one now
+            </Button>
+          </div>
         )}
 
         {/* Task Items */}
         {!isLoading && priorityTasks.map((task) => (
           <div
             key={task.id}
-            className="flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-800/70 transition-colors"
+            className="flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-800/70 transition-colors group"
           >
             <Checkbox
               id={`donow-task-${task.id}`}
@@ -95,16 +105,26 @@ export function DoNowCard({ onAddTask }: DoNowCardProps) {
             <label
               htmlFor={`donow-task-${task.id}`}
               className={cn(
-                "flex-1 text-sm cursor-pointer truncate",
+                "flex-1 text-sm cursor-pointer truncate transition-all",
                 task.is_completed
                   ? "text-zinc-500 line-through"
-                  : "text-zinc-200"
+                  : "text-zinc-200 group-hover:text-zinc-100"
               )}
             >
               {task.title}
             </label>
           </div>
         ))}
+      </div>
+      
+      {/* Footer Link */}
+      <div className="pt-4 mt-2 border-t border-zinc-800/50">
+        <Link 
+          href="/dashboard/list" 
+          className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors flex items-center gap-1"
+        >
+          View all tasks →
+        </Link>
       </div>
     </div>
   );
