@@ -12,12 +12,17 @@ import { Footer } from "@/components/footer";
  */
 export default async function LandingPage() {
   // Smart redirect - if user is already logged in, redirect to dashboard
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-  if (session) {
-    redirect("/dashboard");
+    if (session) {
+      redirect("/dashboard");
+    }
+  } catch (e: unknown) {
+    // If auth check fails, just show the landing page
+    if (e && typeof e === "object" && "digest" in e) throw e; // re-throw Next.js redirect
   }
 
   return (

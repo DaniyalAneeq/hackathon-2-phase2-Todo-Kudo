@@ -4,9 +4,14 @@ import { redirect } from "next/navigation";
 import { ModernTaskListWrapper } from "./ModernTaskListWrapper";
 
 export default async function TaskListPage() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  let session;
+  try {
+    session = await auth.api.getSession({
+      headers: await headers(),
+    });
+  } catch {
+    redirect("/login");
+  }
 
   if (!session) {
     redirect("/login");
