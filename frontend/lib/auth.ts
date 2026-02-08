@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { jwt } from "better-auth/plugins";
+import { nextCookies } from "better-auth/next-js";
 import { Pool } from "pg";
 import { randomUUID } from "crypto";
 
@@ -26,6 +27,10 @@ export const auth = betterAuth({
   },
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  trustedOrigins: [
+    process.env.BETTER_AUTH_URL || "http://localhost:3000",
+    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
+  ],
 
   // Enable JWT plugin for backend API authentication
   // Use RS256 algorithm (compatible with python-jose on backend)
@@ -37,6 +42,7 @@ export const auth = betterAuth({
         },
       },
     }),
+    nextCookies(), // Must be the last plugin - handles Set-Cookie in Next.js server context
   ],
 
   // Configure to generate UUIDs instead of default string IDs
